@@ -1,4 +1,5 @@
 from ..base.backend import BaseBackend
+from ..wireguard.wireguard import Wireguard
 from . import converters
 from .parser import OpenWrtParser, config_path, packages_pattern
 from .renderer import OpenWrtRenderer
@@ -51,3 +52,27 @@ class OpenWrt(BaseBackend):
                 name='{0}{1}'.format(config_path, package_name),
                 contents=text_contents,
             )
+
+    @classmethod
+    def wireguard_auto_client(cls, **kwargs):
+        data = Wireguard.auto_client(**kwargs)
+        config = {
+            'interfaces': [
+                {
+                    'name': data['client']['name'],
+                    'type': 'wireguard',
+                    'private_key': data['client']['private_key'],
+                    'port': data['client']['port'],
+                }
+            ],
+            'wireguard_peers': [
+                {
+                    'interface': data['server']['name'],
+                    'public_key': data['server']['public_key'],
+                    'allowed_ips': data['server']['allowed_ips'],
+                    'endpoint_host': data['server']['endpoint_host'],
+                    'endpoint_port': data['server']['endpoint_port'],
+                }
+            ],
+        }
+        return config
