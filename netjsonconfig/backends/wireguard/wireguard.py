@@ -16,14 +16,14 @@ class Wireguard(BaseVpnBackend):
     @classmethod
     def auto_client(cls, host=None, pub_key=None, server={}, port=51820, **kwargs):
         """
-        Returns a configuration dictionary representing an Wireguard client configuration
+        Returns a configuration dictionary representing Wireguard configuration
         that is compatible with the passed server configuration.
 
         :param host: remote VPN server
         :param port: listen port for Wireguard Client
         :param server: dictionary representing a single Wireguard server configuration
         :param pub_key: publick key of the Wireguard server
-        :returns: dictionary representing a single OpenVPN client configuration
+        :returns: dictionary representing a Wireguard server and client properties
         """
         server_name = server.get('name')
         return {

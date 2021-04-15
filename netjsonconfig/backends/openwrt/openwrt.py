@@ -1,4 +1,5 @@
 from ..base.backend import BaseBackend
+from ..vxlan.vxlan_wireguard import VxlanWireguard
 from ..wireguard.wireguard import Wireguard
 from . import converters
 from .parser import OpenWrtParser, config_path, packages_pattern
@@ -63,6 +64,14 @@ class OpenWrt(BaseBackend):
                     'type': 'wireguard',
                     'private_key': data['client']['private_key'],
                     'port': data['client']['port'],
+                    # Default values for Wireguard Interface
+                    'mtu': 1420,
+                    'nohostroute': False,
+                    'fwmark': '',
+                    'ip6prefix': [],
+                    'addresses': [],
+                    'disabled': True,
+                    'network': '',
                 }
             ],
             'wireguard_peers': [
@@ -72,7 +81,34 @@ class OpenWrt(BaseBackend):
                     'allowed_ips': data['server']['allowed_ips'],
                     'endpoint_host': data['server']['endpoint_host'],
                     'endpoint_port': data['server']['endpoint_port'],
+                    # Default values for Wireguard Peers
+                    'preshared_key': '',
+                    'persistent_keepalive': 0,
+                    'route_allowed_ips': False,
                 }
             ],
         }
+        return config
+
+    @classmethod
+    def vxlan_wireguard_auto_client(cls, **kwargs):
+        config = cls.wireguard_auto_client(**kwargs)
+        vxlan_config = VxlanWireguard.auto_client(**kwargs)
+        vxlan_interface = {
+            'name': 'vxlan',
+            'type': 'vxlan',
+            'vtep': vxlan_config['server_ip_address'],
+            'port': 4789,
+            'vni': vxlan_config['vni'],
+            'tunlink': config['interfaces'][0]['name'],
+            # Default values for VXLAN interface
+            'rxcsum': True,
+            'txcsum': True,
+            'mtu': 1280,
+            'ttl': 64,
+            'mac': '',
+            'disabled': False,
+            'network': '',
+        }
+        config['interfaces'].append(vxlan_interface)
         return config

@@ -371,7 +371,6 @@ schema = merge_config(
                             },
                             "vtep": {
                                 "type": "string",
-                                "format": "hostname",
                                 "title": "VTEP",
                                 "description": "VXLAN Tunnel End Point",
                                 "propertyOrder": 1.1,
