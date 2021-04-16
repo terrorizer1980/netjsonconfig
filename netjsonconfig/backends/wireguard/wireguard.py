@@ -14,7 +14,7 @@ class Wireguard(BaseVpnBackend):
     config_suffix = config_suffix
 
     @classmethod
-    def auto_client(cls, host=None, pub_key=None, server={}, port=51820, **kwargs):
+    def auto_client(cls, host='', pub_key='', server={}, port=51820, **kwargs):
         """
         Returns a configuration dictionary representing Wireguard configuration
         that is compatible with the passed server configuration.
@@ -25,7 +25,7 @@ class Wireguard(BaseVpnBackend):
         :param pub_key: publick key of the Wireguard server
         :returns: dictionary representing a Wireguard server and client properties
         """
-        server_name = server.get('name')
+        server_name = server.get('name', '')
         return {
             'client': {
                 'port': port,
@@ -36,7 +36,7 @@ class Wireguard(BaseVpnBackend):
                 'name': server_name,
                 'public_key': pub_key,
                 'endpoint_host': host,
-                'endpoint_port': server.get('port'),
-                'allowed_ips': [kwargs.get('server_ip_max_prefix')],
+                'endpoint_port': server.get('port', 51820),
+                'allowed_ips': [kwargs.get('server_ip_max_prefix', '')],
             },
         }

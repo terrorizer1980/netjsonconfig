@@ -421,3 +421,113 @@ config wifi-iface 'wifi_wlan0'
         # ensure the additional files are there present in the tar.gz archive
         tar = tarfile.open(fileobj=o.generate(), mode='r')
         self.assertEqual(len(tar.getmembers()), 1)
+
+    def _get_wireguard_empty_configuration(self):
+        return {
+            'interfaces': [
+                {
+                    'addresses': [],
+                    'disabled': True,
+                    'fwmark': '',
+                    'ip6prefix': [],
+                    'mtu': 1420,
+                    'name': '_client',
+                    'network': '',
+                    'nohostroute': False,
+                    'port': 51820,
+                    'private_key': '{{private_key}}',
+                    'type': 'wireguard',
+                }
+            ],
+            'wireguard_peers': [
+                {
+                    'allowed_ips': [''],
+                    'endpoint_host': '',
+                    'endpoint_port': 51820,
+                    'interface': '',
+                    'persistent_keepalive': 0,
+                    'preshared_key': '',
+                    'public_key': '',
+                    'route_allowed_ips': False,
+                }
+            ],
+        }
+
+    def _get_vxlan_wireguard_empty_configuration(self):
+        wireguard_config = self._get_wireguard_empty_configuration()
+        vxlan_config = {
+            'disabled': False,
+            'mac': '',
+            'mtu': 1280,
+            'name': 'vxlan',
+            'network': '',
+            'port': 4789,
+            'rxcsum': True,
+            'ttl': 64,
+            'tunlink': '_client',
+            'txcsum': True,
+            'type': 'vxlan',
+            'vni': 0,
+            'vtep': '',
+        }
+        wireguard_config['interfaces'].append(vxlan_config)
+        return wireguard_config
+
+    def test_wireguard_auto_client(self):
+        with self.subTest('No arguments provided'):
+            expected = self._get_wireguard_empty_configuration()
+            self.assertDictEqual(OpenWrt.wireguard_auto_client(), expected)
+        with self.subTest('Required arguments provided'):
+            expected = self._get_wireguard_empty_configuration()
+            expected['interfaces'][0].update(
+                {'name': 'wg_client', 'private_key': '{{private_key}}'}
+            )
+            expected['wireguard_peers'][0].update(
+                {
+                    'allowed_ips': ['10.0.0.1/24'],
+                    'endpoint_host': '0.0.0.0',
+                    'public_key': 'server_public_key',
+                    'interface': 'wg',
+                }
+            )
+            self.assertDictEqual(
+                OpenWrt.wireguard_auto_client(
+                    host='0.0.0.0',
+                    pub_key='server_public_key',
+                    server={'name': 'wg', 'port': 51820},
+                    server_ip_max_prefix='10.0.0.1/24',
+                ),
+                expected,
+            )
+
+    def test_vxlan_wireguard_auto_client(self):
+        with self.subTest('No arguments provided'):
+            expected = self._get_vxlan_wireguard_empty_configuration()
+            self.assertDictEqual(OpenWrt.vxlan_wireguard_auto_client(), expected)
+        with self.subTest('Required arguments provided'):
+            expected = self._get_vxlan_wireguard_empty_configuration()
+            expected['interfaces'][0].update(
+                {'name': 'wg_client', 'private_key': '{{private_key}}'}
+            )
+            expected['wireguard_peers'][0].update(
+                {
+                    'allowed_ips': ['10.0.0.1/24'],
+                    'endpoint_host': '0.0.0.0',
+                    'public_key': 'server_public_key',
+                    'interface': 'wg',
+                }
+            )
+            expected['interfaces'][1].update(
+                {'tunlink': 'wg_client', 'vni': 1, 'vtep': '10.0.0.1'}
+            )
+            self.assertDictEqual(
+                OpenWrt.vxlan_wireguard_auto_client(
+                    host='0.0.0.0',
+                    pub_key='server_public_key',
+                    server={'name': 'wg', 'port': 51820},
+                    server_ip_max_prefix='10.0.0.1/24',
+                    vni=1,
+                    server_ip_address='10.0.0.1',
+                ),
+                expected,
+            )

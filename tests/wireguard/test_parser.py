@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import patch
+
 from netjsonconfig.backends.wireguard.parser import WireguardParser
 
 

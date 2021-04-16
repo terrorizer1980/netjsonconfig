@@ -16,5 +16,4 @@ class VxlanWireguard(Wireguard):
             'server_ip_address': server_ip_address,
             'vni': vni,
         }
-        print(kwargs)
         return config

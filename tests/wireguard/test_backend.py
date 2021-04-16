@@ -125,3 +125,45 @@ AllowedIPs = 10.0.0.3/32
 PublicKey = jqHs76yCH0wThMSqogDshndAiXelfffUJVcFmz352HI=
 """
         self.assertEqual(contents, expected)
+
+    def test_auto_client(self):
+        with self.subTest('No arguments are provided'):
+            expected = {
+                'client': {
+                    'port': 51820,
+                    'private_key': '{{private_key}}',
+                    'name': '_client',
+                },
+                'server': {
+                    'name': '',
+                    'public_key': '',
+                    'endpoint_host': '',
+                    'endpoint_port': 51820,
+                    'allowed_ips': [''],
+                },
+            }
+            self.assertDictEqual(Wireguard.auto_client(), expected)
+        with self.subTest('Required arguments are provided'):
+            expected = {
+                'client': {
+                    'port': 51820,
+                    'private_key': '{{private_key}}',
+                    'name': 'wg_client',
+                },
+                'server': {
+                    'name': 'wg',
+                    'public_key': 'server_public_key',
+                    'endpoint_host': '0.0.0.0',
+                    'endpoint_port': 51820,
+                    'allowed_ips': ['10.0.0.1/24'],
+                },
+            }
+            self.assertDictEqual(
+                Wireguard.auto_client(
+                    host='0.0.0.0',
+                    pub_key='server_public_key',
+                    server={'name': 'wg', 'port': 51820},
+                    server_ip_max_prefix='10.0.0.1/24',
+                ),
+                expected,
+            )
