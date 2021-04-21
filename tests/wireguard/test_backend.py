@@ -27,11 +27,13 @@ class TestBackend(unittest.TestCase):
                         "name": "test1",
                         "private_key": "QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
                         "port": 40842,
+                        "address": "10.0.0.1/24",
                     },
                     {
                         "name": "test2",
                         "private_key": "AFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
                         "port": 40843,
+                        "address": "10.0.1.1/24",
                     },
                 ]
             }
@@ -39,12 +41,14 @@ class TestBackend(unittest.TestCase):
         expected = """# wireguard config: test1
 
 [Interface]
+Address = 10.0.0.1/24
 ListenPort = 40842
 PrivateKey = QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=
 
 # wireguard config: test2
 
 [Interface]
+Address = 10.0.1.1/24
 ListenPort = 40843
 PrivateKey = AFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=
 """
@@ -58,6 +62,7 @@ PrivateKey = AFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=
                         "name": "test1",
                         "private_key": "QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
                         "port": 40842,
+                        "address": "10.0.0.1/24",
                         "peers": [
                             {
                                 "public_key": "jqHs76yCH0wThMSqogDshndAiXelfffUJVcFmz352HI=",
@@ -78,6 +83,7 @@ PrivateKey = AFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=
         expected = """# wireguard config: test1
 
 [Interface]
+Address = 10.0.0.1/24
 ListenPort = 40842
 PrivateKey = QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=
 
@@ -101,6 +107,7 @@ PublicKey = 94a+MnZSdzHCzOy5y2K+0+Xe7lQzaa4v7lEiBZ7elVE=
                         "name": "test1",
                         "private_key": "QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
                         "port": 40842,
+                        "address": "10.0.0.1/24",
                         "peers": [
                             {
                                 "public_key": "jqHs76yCH0wThMSqogDshndAiXelfffUJVcFmz352HI=",
@@ -117,6 +124,7 @@ PublicKey = 94a+MnZSdzHCzOy5y2K+0+Xe7lQzaa4v7lEiBZ7elVE=
         vpn1 = tar.getmember('test1.conf')
         contents = tar.extractfile(vpn1).read().decode()
         expected = """[Interface]
+Address = 10.0.0.1/24
 ListenPort = 40842
 PrivateKey = QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=
 
