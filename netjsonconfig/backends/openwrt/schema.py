@@ -307,7 +307,6 @@ schema = merge_config(
                                                     "type": "string",
                                                     "title": "ipv4 address",
                                                     "minLength": 7,
-                                                    "format": "ipv4",
                                                     "propertyOrder": 3,
                                                 },
                                                 "mask": {

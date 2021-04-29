@@ -88,6 +88,15 @@ class OpenWrt(BaseBackend):
                 }
             ],
         }
+        if data['client']['ip_address']:
+            config['interfaces'][0]['addresses'] = [
+                {
+                    'proto': 'static',
+                    'family': 'ipv4',
+                    'address': data['client']['ip_address'],
+                    'mask': 32,
+                },
+            ]
         return config
 
     @classmethod

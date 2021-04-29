@@ -31,6 +31,7 @@ class Wireguard(BaseVpnBackend):
                 'port': port,
                 'private_key': '{{private_key}}',
                 'name': f'{server_name}_client',
+                'ip_address': kwargs.get('ip_address'),
             },
             'server': {
                 'name': server_name,

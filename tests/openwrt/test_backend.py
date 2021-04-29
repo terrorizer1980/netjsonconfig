@@ -480,7 +480,18 @@ config wifi-iface 'wifi_wlan0'
         with self.subTest('Required arguments provided'):
             expected = self._get_wireguard_empty_configuration()
             expected['interfaces'][0].update(
-                {'name': 'wg_client', 'private_key': '{{private_key}}'}
+                {
+                    'name': 'wg_client',
+                    'private_key': '{{private_key}}',
+                    'addresses': [
+                        {
+                            'address': '10.0.0.2',
+                            'family': 'ipv4',
+                            'mask': 32,
+                            'proto': 'static',
+                        },
+                    ],
+                }
             )
             expected['wireguard_peers'][0].update(
                 {
@@ -496,6 +507,7 @@ config wifi-iface 'wifi_wlan0'
                     pub_key='server_public_key',
                     server={'name': 'wg', 'port': 51820},
                     server_ip_max_prefix='10.0.0.1/24',
+                    ip_address='10.0.0.2',
                 ),
                 expected,
             )

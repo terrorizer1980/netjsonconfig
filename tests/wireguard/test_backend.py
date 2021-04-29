@@ -141,6 +141,7 @@ PublicKey = jqHs76yCH0wThMSqogDshndAiXelfffUJVcFmz352HI=
                     'port': 51820,
                     'private_key': '{{private_key}}',
                     'name': '_client',
+                    'ip_address': None,
                 },
                 'server': {
                     'name': '',
@@ -157,6 +158,7 @@ PublicKey = jqHs76yCH0wThMSqogDshndAiXelfffUJVcFmz352HI=
                     'port': 51820,
                     'private_key': '{{private_key}}',
                     'name': 'wg_client',
+                    'ip_address': '10.0.0.2',
                 },
                 'server': {
                     'name': 'wg',
@@ -172,6 +174,7 @@ PublicKey = jqHs76yCH0wThMSqogDshndAiXelfffUJVcFmz352HI=
                     pub_key='server_public_key',
                     server={'name': 'wg', 'port': 51820},
                     server_ip_max_prefix='10.0.0.1/24',
+                    ip_address='10.0.0.2',
                 ),
                 expected,
             )
