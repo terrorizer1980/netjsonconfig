@@ -137,14 +137,13 @@ PublicKey = jqHs76yCH0wThMSqogDshndAiXelfffUJVcFmz352HI=
     def test_auto_client(self):
         with self.subTest('No arguments are provided'):
             expected = {
+                'interface_name': '',
                 'client': {
                     'port': 51820,
                     'private_key': '{{private_key}}',
-                    'name': '_client',
                     'ip_address': None,
                 },
                 'server': {
-                    'name': '',
                     'public_key': '',
                     'endpoint_host': '',
                     'endpoint_port': 51820,
@@ -154,14 +153,13 @@ PublicKey = jqHs76yCH0wThMSqogDshndAiXelfffUJVcFmz352HI=
             self.assertDictEqual(Wireguard.auto_client(), expected)
         with self.subTest('Required arguments are provided'):
             expected = {
+                'interface_name': 'wg',
                 'client': {
                     'port': 51820,
                     'private_key': '{{private_key}}',
-                    'name': 'wg_client',
                     'ip_address': '10.0.0.2',
                 },
                 'server': {
-                    'name': 'wg',
                     'public_key': 'server_public_key',
                     'endpoint_host': '0.0.0.0',
                     'endpoint_port': 51820,

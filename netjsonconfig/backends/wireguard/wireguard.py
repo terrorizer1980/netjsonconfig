@@ -25,16 +25,14 @@ class Wireguard(BaseVpnBackend):
         :param pub_key: publick key of the Wireguard server
         :returns: dictionary representing a Wireguard server and client properties
         """
-        server_name = server.get('name', '')
         return {
+            'interface_name': server.get('name', ''),
             'client': {
                 'port': port,
                 'private_key': '{{private_key}}',
-                'name': f'{server_name}_client',
                 'ip_address': kwargs.get('ip_address'),
             },
             'server': {
-                'name': server_name,
                 'public_key': pub_key,
                 'endpoint_host': host,
                 'endpoint_port': server.get('port', 51820),

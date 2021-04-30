@@ -427,11 +427,10 @@ config wifi-iface 'wifi_wlan0'
             'interfaces': [
                 {
                     'addresses': [],
-                    'disabled': True,
                     'fwmark': '',
                     'ip6prefix': [],
                     'mtu': 1420,
-                    'name': '_client',
+                    'name': '',
                     'network': '',
                     'nohostroute': False,
                     'port': 51820,
@@ -448,7 +447,7 @@ config wifi-iface 'wifi_wlan0'
                     'persistent_keepalive': 0,
                     'preshared_key': '',
                     'public_key': '',
-                    'route_allowed_ips': False,
+                    'route_allowed_ips': True,
                 }
             ],
         }
@@ -464,7 +463,7 @@ config wifi-iface 'wifi_wlan0'
             'port': 4789,
             'rxcsum': True,
             'ttl': 64,
-            'tunlink': '_client',
+            'tunlink': '',
             'txcsum': True,
             'type': 'vxlan',
             'vni': 0,
@@ -481,7 +480,7 @@ config wifi-iface 'wifi_wlan0'
             expected = self._get_wireguard_empty_configuration()
             expected['interfaces'][0].update(
                 {
-                    'name': 'wg_client',
+                    'name': 'wg',
                     'private_key': '{{private_key}}',
                     'addresses': [
                         {
@@ -519,7 +518,7 @@ config wifi-iface 'wifi_wlan0'
         with self.subTest('Required arguments provided'):
             expected = self._get_vxlan_wireguard_empty_configuration()
             expected['interfaces'][0].update(
-                {'name': 'wg_client', 'private_key': '{{private_key}}'}
+                {'name': 'wg', 'private_key': '{{private_key}}'}
             )
             expected['wireguard_peers'][0].update(
                 {
@@ -530,7 +529,7 @@ config wifi-iface 'wifi_wlan0'
                 }
             )
             expected['interfaces'][1].update(
-                {'tunlink': 'wg_client', 'vni': 1, 'vtep': '10.0.0.1'}
+                {'tunlink': 'wg', 'vni': 1, 'vtep': '10.0.0.1'}
             )
             self.assertDictEqual(
                 OpenWrt.vxlan_wireguard_auto_client(

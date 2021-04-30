@@ -60,7 +60,7 @@ class OpenWrt(BaseBackend):
         config = {
             'interfaces': [
                 {
-                    'name': data['client']['name'],
+                    'name': data['interface_name'],
                     'type': 'wireguard',
                     'private_key': data['client']['private_key'],
                     'port': data['client']['port'],
@@ -70,13 +70,12 @@ class OpenWrt(BaseBackend):
                     'fwmark': '',
                     'ip6prefix': [],
                     'addresses': [],
-                    'disabled': True,
                     'network': '',
                 }
             ],
             'wireguard_peers': [
                 {
-                    'interface': data['server']['name'],
+                    'interface': data['interface_name'],
                     'public_key': data['server']['public_key'],
                     'allowed_ips': data['server']['allowed_ips'],
                     'endpoint_host': data['server']['endpoint_host'],
@@ -84,7 +83,7 @@ class OpenWrt(BaseBackend):
                     # Default values for Wireguard Peers
                     'preshared_key': '',
                     'persistent_keepalive': 0,
-                    'route_allowed_ips': False,
+                    'route_allowed_ips': True,
                 }
             ],
         }
