@@ -82,7 +82,7 @@ class OpenWrt(BaseBackend):
                     'endpoint_port': data['server']['endpoint_port'],
                     # Default values for Wireguard Peers
                     'preshared_key': '',
-                    'persistent_keepalive': 0,
+                    'persistent_keepalive': 60,
                     'route_allowed_ips': True,
                 }
             ],

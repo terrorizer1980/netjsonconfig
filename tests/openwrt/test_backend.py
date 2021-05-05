@@ -444,7 +444,7 @@ config wifi-iface 'wifi_wlan0'
                     'endpoint_host': '',
                     'endpoint_port': 51820,
                     'interface': '',
-                    'persistent_keepalive': 0,
+                    'persistent_keepalive': 60,
                     'preshared_key': '',
                     'public_key': '',
                     'route_allowed_ips': True,
