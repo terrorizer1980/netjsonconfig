@@ -171,7 +171,7 @@ PublicKey = jqHs76yCH0wThMSqogDshndAiXelfffUJVcFmz352HI=
                     host='0.0.0.0',
                     pub_key='server_public_key',
                     server={'name': 'wg', 'port': 51820},
-                    server_ip_max_prefix='10.0.0.1/24',
+                    server_ip_network='10.0.0.1/24',
                     ip_address='10.0.0.2',
                 ),
                 expected,

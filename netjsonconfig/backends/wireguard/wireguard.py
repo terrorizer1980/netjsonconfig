@@ -36,6 +36,6 @@ class Wireguard(BaseVpnBackend):
                 'public_key': pub_key,
                 'endpoint_host': host,
                 'endpoint_port': server.get('port', 51820),
-                'allowed_ips': [kwargs.get('server_ip_max_prefix', '')],
+                'allowed_ips': [kwargs.get('server_ip_network', '')],
             },
         }
