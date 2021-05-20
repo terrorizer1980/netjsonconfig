@@ -102,7 +102,9 @@ The current implemented backends are:
 
  * :doc:`OpenWrt </backends/openwrt>`
  * :doc:`OpenWisp </backends/openwisp>` (based on the ``OpenWrt`` backend)
- * :doc:`OpenVpn </backends/openvpn>` (custom backend implementing only OpenVPN configuration)
+ * :doc:`OpenVpn </backends/vpn/openvpn>` (custom backend implementing only OpenVPN configuration)
+ * :doc:`WireGuard </backends/vpn/wireguard>` (custom backend implementing only WireGuard configuration)
+ * :doc:`VXLAN over WireGuard </backends/vpn/vxlan_over_wireguard>` (custom backend implementing only VXLAN over WireGuard configuration)
 
 Example initialization of ``OpenWrt`` backend:
 
