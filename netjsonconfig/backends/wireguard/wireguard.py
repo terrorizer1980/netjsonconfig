@@ -22,14 +22,14 @@ class Wireguard(BaseVpnBackend):
         :param host: remote VPN server
         :param port: listen port for Wireguard Client
         :param server: dictionary representing a single Wireguard server configuration
-        :param pub_key: publick key of the Wireguard server
+        :param pub_key: public key of the Wireguard server
         :returns: dictionary representing a Wireguard server and client properties
         """
         return {
             'interface_name': server.get('name', ''),
             'client': {
                 'port': port,
-                'private_key': '{{private_key}}',
+                'private_key': kwargs.get('private_key', '{{private_key}}'),
                 'ip_address': kwargs.get('ip_address'),
             },
             'server': {
