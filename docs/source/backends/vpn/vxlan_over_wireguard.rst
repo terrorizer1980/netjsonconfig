@@ -29,7 +29,7 @@ Example:
                                         vni=1,
                                         server_ip_address=server_config['server_ip_address'],
                                         server=server_config,
-                                        pub_key=server_config['public_key'],
+                                        public_key=server_config['public_key'],
                                         port=51820,
                                         private_key='QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=',
                                         ip_address='10.0.0.5/32',

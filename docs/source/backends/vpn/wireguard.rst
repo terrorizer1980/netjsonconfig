@@ -157,7 +157,7 @@ Example:
     }
     client_config = OpenWrt.wireguard_auto_client(host='wireguard.test.com',
                                         server=server_config,
-                                        pub_key=server_config['public_key'],
+                                        public_key=server_config['public_key'],
                                         port=51820,
                                         private_key='QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=',
                                         ip_address='10.0.0.5/32',

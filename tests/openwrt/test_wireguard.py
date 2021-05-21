@@ -161,7 +161,7 @@ config wireguard_wg0 'wgpeer'
                 "wireguard_peers": [
                     {
                         "interface": "wg0",
-                        "public_key": "{{pub_key_8097b09be57a4b278e2ef2ea9ea809f3}}",
+                        "public_key": "{{public_key_8097b09be57a4b278e2ef2ea9ea809f3}}",
                         "allowed_ips": [
                             "{{server_ip_network_8097b09be57a4b278e2ef2ea9ea809f3}}"
                         ],
@@ -176,7 +176,7 @@ config wireguard_wg0 'wgpeer'
             context={
                 "server_ip_network_8097b09be57a4b278e2ef2ea9ea809f3": "10.0.0.1/32",
                 "vpn_host_8097b09be57a4b278e2ef2ea9ea809f3": "192.168.1.42",
-                "pub_key_8097b09be57a4b278e2ef2ea9ea809f3": "rn+isMBpyQ4HX6ZzE709bKnZw5IaLZoIS3hIjmfKCkk=",
+                "public_key_8097b09be57a4b278e2ef2ea9ea809f3": "rn+isMBpyQ4HX6ZzE709bKnZw5IaLZoIS3hIjmfKCkk=",
                 "pre_key_8097b09be57a4b278e2ef2ea9ea809f3": "oPZmGdHBseaV1TF0julyElNuJyeKs2Eo+o62R/09IB4=",
             },
         )

@@ -503,7 +503,7 @@ config wifi-iface 'wifi_wlan0'
             self.assertDictEqual(
                 OpenWrt.wireguard_auto_client(
                     host='0.0.0.0',
-                    pub_key='server_public_key',
+                    public_key='server_public_key',
                     server={'name': 'wg', 'port': 51820},
                     server_ip_network='10.0.0.1/24',
                     ip_address='10.0.0.2',
@@ -534,7 +534,7 @@ config wifi-iface 'wifi_wlan0'
             self.assertDictEqual(
                 OpenWrt.vxlan_wireguard_auto_client(
                     host='0.0.0.0',
-                    pub_key='server_public_key',
+                    public_key='server_public_key',
                     server={'name': 'wg', 'port': 51820},
                     server_ip_network='10.0.0.1/24',
                     vni=1,
