@@ -36,6 +36,7 @@ Its main features are:
     * `OpenWRT <http://openwrt.org>`_ / `LEDE <https://www.lede-project.org/>`_ support
     * `OpenWisp Firmware <https://github.com/openwisp/OpenWISP-Firmware>`_ support
     * `OpenVPN <https://openvpn.net>`_ support
+    * `Wireguard <https://www.wireguard.com/>`_ support
     * Plugin interface for external backends, support more firmwares with an external package
 
       * :doc:`Create your backend </backends/create_your_backend>` as a plugin

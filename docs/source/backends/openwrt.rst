@@ -2336,33 +2336,39 @@ The following *configuration dictionary*:
 .. code-block:: python
 
     {
-        "interfaces": [{
-            "name": "wg",
-            "type": "wireguard",
-            "private_key": "QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
-            "port": 51820,
-            "mtu": 1420,
-            "nohostroute": false,
-            "fwmark": "",
-            "ip6prefix": [],
-            "addresses": [{
-                "proto": "static",
-                "family": "ipv4",
-                "address": "10.0.0.5/32",
-                "mask": 32
-            }],
-            "network": ""
-        }],
-        "wireguard_peers": [{
-            "interface": "wg",
-            "public_key": "94a+MnZSdzHCzOy5y2K+0+Xe7lQzaa4v7lEiBZ7elVE=",
-            "allowed_ips": ["10.0.0.1/32"],
-            "endpoint_host": "wireguard.test.com",
-            "endpoint_port": 51820,
-            "preshared_key": "",
-            "persistent_keepalive": 60,
-            "route_allowed_ips": true
-        }]
+        "interfaces": [
+            {
+                "name": "wg",
+                "type": "wireguard",
+                "private_key": "QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
+                "port": 51820,
+                "mtu": 1420,
+                "nohostroute": false,
+                "fwmark": "",
+                "ip6prefix": [],
+                "addresses": [
+                    {
+                        "proto": "static",
+                        "family": "ipv4",
+                        "address": "10.0.0.5/32",
+                        "mask": 32,
+                    }
+                ],
+                "network": "",
+            }
+        ],
+        "wireguard_peers": [
+            {
+                "interface": "wg",
+                "public_key": "94a+MnZSdzHCzOy5y2K+0+Xe7lQzaa4v7lEiBZ7elVE=",
+                "allowed_ips": ["10.0.0.1/32"],
+                "endpoint_host": "wireguard.test.com",
+                "endpoint_port": 51820,
+                "preshared_key": "",
+                "persistent_keepalive": 60,
+                "route_allowed_ips": true,
+            }
+        ]
     }
 
 Will be rendered as follows:
@@ -2393,7 +2399,7 @@ VXLAN over WireGuard
 This backend includes the schema of the ``VXLAN over Wireguard`` backend, inheriting its features.
 
 For details regarding the **VXLAN over WireGuard** schema please see
-:doc:`VXLAN over WireGuard backend</backends/vpn/vxlan_over_wireguard>`.
+:doc:`VXLAN over WireGuard backend</backends/vxlan_over_wireguard>`.
 
 Schema additions
 ~~~~~~~~~~~~~~~~
@@ -2432,47 +2438,54 @@ The following *configuration dictionary*:
 .. code-block:: python
 
     {
-        "interfaces": [{
-            "name": "wgvxlan",
-            "type": "wireguard",
-            "private_key": "QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
-            "port": 51820,
-            "mtu": 1420,
-            "nohostroute": false,
-            "fwmark": "",
-            "ip6prefix": [],
-            "addresses": [{
-                "proto": "static",
-                "family": "ipv4",
-                "address": "10.0.0.5/32",
-                "mask": 32
-            }],
-            "network": ""
-        }, {
-            "name": "vxlan",
-            "type": "vxlan",
-            "vtep": "10.0.0.1",
-            "port": 4789,
-            "vni": 1,
-            "tunlink": "wgvxlan",
-            "rxcsum": true,
-            "txcsum": true,
-            "mtu": 1280,
-            "ttl": 64,
-            "mac": "",
-            "disabled": false,
-            "network": ""
-        }],
-        "wireguard_peers": [{
-            "interface": "wgvxlan",
-            "public_key": "94a+MnZSdzHCzOy5y2K+0+Xe7lQzaa4v7lEiBZ7elVE=",
-            "allowed_ips": ["10.0.0.1/32"],
-            "endpoint_host": "wireguard.test.com",
-            "endpoint_port": 51820,
-            "preshared_key": "",
-            "persistent_keepalive": 60,
-            "route_allowed_ips": true
-        }]
+        "interfaces": [
+            {
+                "name": "wgvxlan",
+                "type": "wireguard",
+                "private_key": "QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
+                "port": 51820,
+                "mtu": 1420,
+                "nohostroute": false,
+                "fwmark": "",
+                "ip6prefix": [],
+                "addresses": [
+                    {
+                        "proto": "static",
+                        "family": "ipv4",
+                        "address": "10.0.0.5/32",
+                        "mask": 32,
+                    }
+                ],
+                "network": "",
+            },
+            {
+                "name": "vxlan",
+                "type": "vxlan",
+                "vtep": "10.0.0.1",
+                "port": 4789,
+                "vni": 1,
+                "tunlink": "wgvxlan",
+                "rxcsum": true,
+                "txcsum": true,
+                "mtu": 1280,
+                "ttl": 64,
+                "mac": "",
+                "disabled": false,
+                "network": "",
+            },
+        ],
+        "wireguard_peers": [
+            {
+                "interface": "wgvxlan",
+                "public_key": "94a+MnZSdzHCzOy5y2K+0+Xe7lQzaa4v7lEiBZ7elVE=",
+                "allowed_ips": ["10.0.0.1/32"],
+                "endpoint_host": "wireguard.test.com",
+                "endpoint_port": 51820,
+                "preshared_key": "",
+                "persistent_keepalive": 60,
+                "route_allowed_ips": true,
+            }
+        ]
     }
 
 Will be rendered as follows:

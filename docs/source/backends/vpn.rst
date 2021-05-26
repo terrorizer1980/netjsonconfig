@@ -9,6 +9,6 @@ VPN Backends
 .. toctree::
     :maxdepth: 2
 
-    /backends/vpn/openvpn
-    /backends/vpn/wireguard
-    /backends/vpn/vxlan_over_wireguard
+    /backends/openvpn
+    /backends/wireguard
+    /backends/vxlan_over_wireguard

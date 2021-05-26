@@ -2,7 +2,7 @@
 WireGuard Backend
 =================
 
-.. include:: /_github.rst
+.. include:: ../_github.rst
 
 The ``WireGuard`` backend allows to generate WireGuard configurations.
 

@@ -2,9 +2,9 @@
 VXLAN over WireGuard Backend
 ============================
 
-.. include:: /_github.rst
+.. include:: ../_github.rst
 
-The ``VXLAN over WireGuard`` backend extends :doc:`Wireguard backend </backends/vpn/wireguard>`
+The ``VXLAN over WireGuard`` backend extends :doc:`Wireguard backend </backends/wireguard>`
 to add configurations required for VXLAN.
 
 Automatic generation of clients
