@@ -143,7 +143,7 @@ config interface 'wg0'
         expected = self._tabs(
             """package network
 
-config wireguard_wg0 'wgpeer'
+config wireguard_wg0 'wgpeer_wg0'
     list allowed_ips '10.0.0.1/32'
     option endpoint_host '192.168.1.42'
     option endpoint_port '40840'
@@ -183,7 +183,7 @@ config wireguard_wg0 'wgpeer'
         expected = self._tabs(
             """package network
 
-config wireguard_wg0 'wgpeer'
+config wireguard_wg0 'wgpeer_wg0'
     list allowed_ips '10.0.0.1/32'
     option endpoint_host '192.168.1.42'
     option endpoint_port '40840'
@@ -214,7 +214,7 @@ config wireguard_wg0 'wgpeer'
         expected = self._tabs(
             """package network
 
-config wireguard_wg0 'wgpeer'
+config wireguard_wg0 'wgpeer_wg0'
     list allowed_ips '10.0.0.1/32'
     option persistent_keepalive '30'
     option preshared_key 'oPZmGdHBseaV1TF0julyElNuJyeKs2Eo+o62R/09IB4='
@@ -228,7 +228,7 @@ config wireguard_wg0 'wgpeer'
         native = self._tabs(
             """package network
 
-config wireguard_wg0 'wgpeer'
+config wireguard_wg0 'wgpeer_wg0'
     list allowed_ips '10.0.0.1/32'
     option endpoint_host '192.168.1.42'
     option endpoint_port '40840'
