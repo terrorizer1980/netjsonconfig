@@ -2343,7 +2343,7 @@ The following *configuration dictionary*:
                 "private_key": "QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
                 "port": 51820,
                 "mtu": 1420,
-                "nohostroute": false,
+                "nohostroute": False,
                 "fwmark": "",
                 "ip6prefix": [],
                 "addresses": [
@@ -2366,7 +2366,7 @@ The following *configuration dictionary*:
                 "endpoint_port": 51820,
                 "preshared_key": "",
                 "persistent_keepalive": 60,
-                "route_allowed_ips": true,
+                "route_allowed_ips": True,
             }
         ]
     }
@@ -2393,18 +2393,15 @@ Will be rendered as follows:
             option public_key '94a+MnZSdzHCzOy5y2K+0+Xe7lQzaa4v7lEiBZ7elVE='
             option route_allowed_ips '1'
 
-VXLAN over WireGuard
---------------------
+VXLAN
+-----
 
-This backend includes the schema of the ``VXLAN over Wireguard`` backend, inheriting its features.
+``OpenWrt`` backend includes the schema requied for generating VXLAN
+interface configouration. This is useful of setting up layer 2 tunnels.
 
-For details regarding the **VXLAN over WireGuard** schema please see
-:doc:`VXLAN over WireGuard backend</backends/vxlan_over_wireguard>`.
 
-Schema additions
-~~~~~~~~~~~~~~~~
-
-The ``OpenWrt`` backend adds a few properties to the VXLAN over WireGuard schema, see below.
+VXLAN Settings
+~~~~~~~~~~~~~~
 
 +-------------+-------------------+--------------+-------------------------------------------------------------+
 | key name    | type              | default      | description                                                 |
@@ -2421,17 +2418,65 @@ The ``OpenWrt`` backend adds a few properties to the VXLAN over WireGuard schema
 +-------------+-------------------+--------------+-------------------------------------------------------------+
 | ``tunlink`` | list              | ``[]``       | interface to which the VXLAN tunnel will be bound           |
 +-------------+-------------------+--------------+-------------------------------------------------------------+
-| ``rxcsum``  | ``boolean``       | ``True``     | use checksum validation in RX direction                     |
+| ``rxcsum``  | boolean           | ``True``     | use checksum validation in RX direction                     |
 +-------------+-------------------+--------------+-------------------------------------------------------------+
-| ``txcsum``  | ``boolean``       | ``True``     | use checksum validation in TX direction                     |
+| ``txcsum``  | boolean           | ``True``     | use checksum validation in TX direction                     |
 +-------------+-------------------+--------------+-------------------------------------------------------------+
-| ``mtu``     | ``integer``       | ``1280``     | MTU for route, only numbers are allowed                     |
+| ``mtu``     | integer           | ``1280``     | MTU for route, only numbers are allowed                     |
 +-------------+-------------------+--------------+-------------------------------------------------------------+
-| ``ttl``     | ``integer``       | ``64``       | TTL of the encapsulation packets                            |
+| ``ttl``     | integer           | ``64``       | TTL of the encapsulation packets                            |
 +-------------+-------------------+--------------+-------------------------------------------------------------+
+
+VXLAN example
+~~~~~~~~~~~~~
+
+The following *configuration dictionary*:
+
+.. code-block:: python
+
+    {
+        "interfaces": [
+            {
+                "name": "vxlan",
+                "type": "vxlan",
+                "vtep": "10.0.0.1",
+                "port": 4789,
+                "vni": 1,
+                "tunlink": "",
+                "rxcsum": True,
+                "txcsum": True,
+                "mtu": 1280,
+                "ttl": 64,
+                "mac": "",
+                "disabled": False,
+                "network": "",
+            },
+        ]
+    }
+
+Will be rendered as follows:
+
+.. code-block:: text
+
+    package network
+
+    config interface 'vxlan'
+            option enabled '0'
+            option ifname 'vxlan'
+            option mtu '1280'
+            option peeraddr '10.0.0.1'
+            option port '4789'
+            option proto 'vxlan'
+            option rxcsum '1'
+            option ttl '64'
+            option txcsum '1'
+            option vid '1'
 
 VXLAN over WireGuard example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Since a layer 2 tunnel can be encapsulated in a layer 3 tunnel, here is an
+example configuration for setting up a VXLAN tunnel over WireGuard.
 
 The following *configuration dictionary*:
 
@@ -2445,7 +2490,7 @@ The following *configuration dictionary*:
                 "private_key": "QFdbnuYr7rrF4eONCAs7FhZwP7BXX/jD/jq2LXCpaXI=",
                 "port": 51820,
                 "mtu": 1420,
-                "nohostroute": false,
+                "nohostroute": False,
                 "fwmark": "",
                 "ip6prefix": [],
                 "addresses": [
@@ -2465,12 +2510,12 @@ The following *configuration dictionary*:
                 "port": 4789,
                 "vni": 1,
                 "tunlink": "wgvxlan",
-                "rxcsum": true,
-                "txcsum": true,
+                "rxcsum": True,
+                "txcsum": True,
                 "mtu": 1280,
                 "ttl": 64,
                 "mac": "",
-                "disabled": false,
+                "disabled": False,
                 "network": "",
             },
         ],
@@ -2483,7 +2528,7 @@ The following *configuration dictionary*:
                 "endpoint_port": 51820,
                 "preshared_key": "",
                 "persistent_keepalive": 60,
-                "route_allowed_ips": true,
+                "route_allowed_ips": True,
             }
         ]
     }
