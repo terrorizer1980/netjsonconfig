@@ -1,3 +1,4 @@
 jinja2>=2.9,<3.0
 jsonschema>=3.0,<3.3
 six
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
