@@ -4,3 +4,4 @@ sphinx
 sphinx_rtd_theme
 # commit message style check
 openwisp-utils[qa]~=0.7.0
+sqlparse>=0.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
