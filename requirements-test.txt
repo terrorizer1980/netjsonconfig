@@ -4,3 +4,4 @@ sphinx
 sphinx_rtd_theme
 # commit message style check
 openwisp-utils[qa]~=0.7.0
+django>=4.2.15 # not directly required, pinned by Snyk to avoid a vulnerability
